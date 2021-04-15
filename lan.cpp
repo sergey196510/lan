@@ -58,12 +58,27 @@ Lan::~Lan()
 bool Lan::dbopen()
 {
     QSqlDatabase db;
+    bool createdb = false;
+
+    if(!QFile("lan.db").exists())
+        createdb = true;
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/home/lsi/projects/Lan/lan.db");
+    db.setDatabaseName("lan.db");
     if (!db.open()) {
         QMessageBox::critical(this, tr("Open database"), tr("Error in open database file"));
         return false;
+    }
+
+    if (createdb == true) {
+        QSqlQuery q;
+
+        q.exec("CREATE TABLE attr_descr(id integer primary key autoincrement, type int, name text, active int default 0, bd date, descr text, flag int default 0)");
+        q.exec("CREATE TABLE attr_link(id integer primary key autoincrement, i_id int, a_id int, type int, bd date, ld date, active int default 0, descr text, d_id int default 0, open datetime, close datetime)");
+        q.exec("CREATE TABLE item(id integer primary key autoincrement, cod text unique, name text, note text)");
+        q.exec("CREATE TABLE document(id integer primary key autoincrement, data blob)");
+        q.exec("CREATE TABLE tickets(id integer primary key autoincrement, i_id int, tm timestamp, title text, message text)");
+        q.exec("CREATE TABLE item_moves(i_id int, t_id int, prev int, next int, dt date)");
     }
 
     return true;
