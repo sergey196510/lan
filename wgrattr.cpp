@@ -14,6 +14,11 @@ WGrAttr::WGrAttr(QWidget *parent) :
 
     connect(ui->user, &SelectAttribute::Updated, this, &WGrAttr::changeUser);
     connect(ui->mol, &SelectAttribute::Updated, this, &WGrAttr::changeMol);
+
+    connect(ui->user,    SIGNAL(change_data()), SIGNAL(updatedAttribute()));
+    connect(ui->mol,     SIGNAL(change_data()), SIGNAL(updatedAttribute()));
+    connect(ui->schet,   SIGNAL(change_data()), SIGNAL(updatedAttribute()));
+    connect(ui->address, SIGNAL(change_data()), SIGNAL(updatedAttribute()));
 }
 
 WGrAttr::~WGrAttr()

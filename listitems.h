@@ -1,6 +1,7 @@
 #ifndef LISTITEMS_H
 #define LISTITEMS_H
 
+#include <vector>
 #include <QClipboard>
 #include <QWidget>
 #include <QAbstractTableModel>
@@ -57,13 +58,13 @@ public:
 
 public slots:
     void reload_list(attrSearch);
-    QList<Item> List() { return list; }
+    std::vector<Item> List() { return list; }
     void sort(int col, Qt::SortOrder);
 
 private:
     QStringList header_data;
-    QList<Item> list;
-    QList<Item> read_list(attrSearch);
+    std::vector<Item> list;
+    std::vector<Item> read_list(attrSearch);
     QVariant item(int row, int col);
     int sortcolumn;
     Qt::SortOrder sortorder;
@@ -78,7 +79,7 @@ public:
     explicit ListItems(QWidget *parent = 0);
     ~ListItems();
     QList<QAction*> acts;
-    QList<int> get_selected_id();
+    std::vector<int> get_selected_id();
 
 public slots:
     void select_attr(int idx);
@@ -95,7 +96,7 @@ public slots:
 private:
     Ui::ListItems *ui;
     ListItemsModel *model;
-    QList<QPoint> point;
+    std::vector<QPoint> point;
     Search *s;
     int position;
     QModelIndexList indexes;

@@ -1,6 +1,7 @@
 #ifndef LISTTICKETS_H
 #define LISTTICKETS_H
 
+#include <vector>
 #include <QAction>
 #include <QtSql>
 #include <QDateTime>
@@ -36,7 +37,7 @@ class ListTicketsModel : public QAbstractTableModel
 
     int pid;
     QStringList header_data;
-    QList<Ticket> list;
+    std::vector<Ticket> list;
     void read_list(int id);
 
 public:

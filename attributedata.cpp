@@ -21,7 +21,7 @@ void AttributeData::read_list(int type)
     while (q.next()) {
         Attribute a(q.value(0).toInt());
 //        qDebug() << a.Flag() << a.Name();
-        list.append(a);
+        list.push_back(a);
     }
 }
 
@@ -34,14 +34,14 @@ QVariant AttributeData::value(int row, int column)
 //        return list.at(row).Id();
 //        break;
     case 0:
-        return list.at(row).Name();
+        return list[row].Name();
         break;
     case 1:
-        if (list.at(row).Aist())
+        if (list[row].Aist())
             str += "A";
-        if (list.at(row).defaultUser())
+        if (list[row].defaultUser())
             str += "U";
-        if (list.at(row).Passive())
+        if (list[row].Passive())
             str += "R";
         return str;
 //        return list.at(row).Id();

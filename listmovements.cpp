@@ -29,11 +29,11 @@ ListMovements1Model::ListMovements1Model(int _id, QObject *parent)
 {
     id = _id;
 
-    attr.append("");
-    attr.append("Пользователь");
-    attr.append("Адрес");
-    attr.append("МОЛ");
-    attr.append("Счет");
+    attr.push_back("");
+    attr.push_back("Пользователь");
+    attr.push_back("Адрес");
+    attr.push_back("МОЛ");
+    attr.push_back("Счет");
 
     header_data << tr("Установлен") << tr("Демонтирован") << tr("Код") << tr("Наименование") << tr("Атрибут") << tr("Значение") << tr("Статус");
 }
@@ -142,7 +142,7 @@ void ListMovements1Model::readList()
         m.attr = a.Name();
         m.type = q.value(2).toInt();
         m.active = q.value(3).toInt();
-        list.append(m);
+        list.push_back(m);
     }
 }
 
@@ -150,11 +150,11 @@ ListMovements2Model::ListMovements2Model(int _id, QObject *parent)
 {
     id = _id;
 
-    attr.append("");
-    attr.append("Пользователь");
-    attr.append("Адрес");
-    attr.append("МОЛ");
-    attr.append("Счет");
+    attr.push_back("");
+    attr.push_back("Пользователь");
+    attr.push_back("Адрес");
+    attr.push_back("МОЛ");
+    attr.push_back("Счет");
 
     moves = new itemMoves;
 //    moves->readList(first, last);

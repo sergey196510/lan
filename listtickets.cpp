@@ -131,7 +131,7 @@ void ListTicketsModel::read_list(int id)
     }
     while (q.next()) {
         Ticket t(q.value(0).toInt());
-        list.append(t);
+        list.push_back(t);
     }
 }
 

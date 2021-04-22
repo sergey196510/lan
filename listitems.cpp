@@ -21,7 +21,7 @@ ListItemsModel::~ListItemsModel()
 
 }
 
-QList<Item> ListItemsModel::read_list(attrSearch as)
+std::vector<Item> ListItemsModel::read_list(attrSearch as)
 {
     QSqlQuery q;
 
@@ -39,7 +39,7 @@ QList<Item> ListItemsModel::read_list(attrSearch as)
             continue;
         if (as.user && i.Attribute().User() != as.user)
             continue;
-        list.append(i);
+        list.push_back(i);
     }
 
     return list;
@@ -225,7 +225,7 @@ void ListItemsModel::sort(int col, Qt::SortOrder order)
             }
         }
         if (flag == true) {
-            list.swap(f, mi);
+            std::swap(list[f], list[mi]);
         }
         qApp->processEvents();
     }
@@ -325,7 +325,7 @@ ListItems::ListItems(QWidget *parent) :
     for (int i = 0; i < ui->tableView->model()->rowCount(); i++) {
         for (int j = 0; j < ui->tableView->model()->columnCount(); j++) {
             QPoint p(j,i);
-            point.append(p);
+            point.push_back(p);
         }
     }
 
@@ -393,6 +393,8 @@ void ListItems::new_record()
         m.insert();
         select_attr(0);
     }
+
+    delete ei;
 }
 
 void ListItems::update_record()
@@ -411,7 +413,7 @@ void ListItems::change_attribute()
 //    QAction *action = qobject_cast<QAction*>(sender());
     QString s = sender()->objectName();
     SelAttr *sa = new SelAttr(this);
-    QList<int> list_id = get_selected_id();
+    std::vector<int> list_id = get_selected_id();
     Item is, id;
 
     connect(sa, SIGNAL(updateAttribute()), SLOT(update_attribute()));
@@ -470,11 +472,11 @@ void ListItems::change_attribute()
 
 }
 
-QList<int> ListItems::get_selected_id()
+std::vector<int> ListItems::get_selected_id()
 {
     QModelIndexList list;
     QModelIndex idx;
-    QList<int> l;
+    std::vector<int> l;
 
 //    int id = model->key(ui->tableView->currentIndex().row());
 //    l.append(id);
@@ -491,7 +493,7 @@ QList<int> ListItems::get_selected_id()
         int r = list.at(i).row();
         int s = model->key(r);
 //        qDebug() << s;
-        l.append(s);
+        l.push_back(s);
     }
 
     return l;
@@ -499,6 +501,8 @@ QList<int> ListItems::get_selected_id()
 
 void ListItems::update_attribute()
 {
+    qDebug() << "Update attributes";
+
     int mol = ui->molBox->Value().toInt();
     int addr = ui->addrBox->Value().toInt();
     int user = ui->userBox->Value().toInt();
@@ -525,7 +529,7 @@ void ListItems::check_cod(QString c)
 void ListItems::history()
 {
     QSqlQuery q;
-    QList<int> l = get_selected_id();
+    std::vector<int> l = get_selected_id();
     QString msg;
 
     if (l.size() != 1) {
@@ -581,7 +585,7 @@ void ListItems::history()
 
 void ListItems::history2()
 {
-    QList<int> l = get_selected_id();
+    std::vector<int> l = get_selected_id();
 
     if (l.size() != 1)
         return;
@@ -749,7 +753,7 @@ void ListItems::search_last()
 void ListItems::update_cod()
 {
     QSqlQuery q;
-    QList<int> l = get_selected_id();
+    std::vector<int> l = get_selected_id();
     Item it;
     EditName en("");
     bool ok;
@@ -770,7 +774,7 @@ void ListItems::update_cod()
 void ListItems::update_name()
 {
     QSqlQuery q;
-    QList<int> l = get_selected_id();
+    std::vector<int> l = get_selected_id();
     Item it;
     EditName en("");
     bool ok;
@@ -823,7 +827,7 @@ void ListItems::selectAll()
 
 void ListItems::tickets()
 {
-    QList<int> id = get_selected_id();
+    std::vector<int> id = get_selected_id();
 
     if (id.size() != 1)
         return;

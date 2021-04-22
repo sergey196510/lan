@@ -25,6 +25,9 @@ private:
 private slots:
     void changeUser();
     void changeMol();
+
+signals:
+    void updatedAttribute();
 };
 
 #endif // WGRATTR_H

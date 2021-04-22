@@ -33,6 +33,7 @@ private slots:
 
 signals:
     void change_data();
+    void changedAttribute();
     void Updated(int);
 };
 

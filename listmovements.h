@@ -1,6 +1,7 @@
 #ifndef LISTMOVEMENTS_H
 #define LISTMOVEMENTS_H
 
+#include <vector>
 #include <QDialog>
 #include <QMessageBox>
 #include <QAbstractTableModel>
@@ -51,8 +52,8 @@ class ListMovements1Model : public ListMovementsModel
     Q_OBJECT
 
 private:
-    QList<QString> attr;
-    QList<Movem> list;
+    std::vector<QString> attr;
+    std::vector<Movem> list;
     QStringList header_data;
 
 public:
@@ -72,7 +73,7 @@ class ListMovements2Model : public ListMovementsModel
     Q_OBJECT
 
 private:
-    QList<QString> attr;
+    std::vector<QString> attr;
     itemMoves *moves;
 
 public:

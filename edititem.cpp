@@ -17,6 +17,8 @@ EditItem::EditItem(QWidget *parent) :
 
     connect(ui->okButton, SIGNAL(clicked()), SLOT(pressOk()));
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
+
+    connect(ui->attribute, SIGNAL(updatedAttribute()), this, SIGNAL(updateAttribute()));
 }
 
 EditItem::~EditItem()

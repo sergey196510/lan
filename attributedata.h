@@ -1,6 +1,7 @@
 #ifndef ATTRIBUTEDATA_H
 #define ATTRIBUTEDATA_H
 
+#include <vector>
 #include <QObject>
 #include <QtSql>
 #include "attribute.h"
@@ -19,7 +20,7 @@ public:
     int isPassive(int idx) const { return list.at(idx).Passive(); }
 
 private:
-    QVector<Attribute> list;
+    std::vector<Attribute> list;
     QStringList header_data;
 };
 
