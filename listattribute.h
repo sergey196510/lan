@@ -49,6 +49,7 @@ private:
     Ui::listAttribute *ui;
     listAttributeModel *model;
     int get_selected_id();
+    void finish_update(Attribute &);
 
 private slots:
     void change_type();

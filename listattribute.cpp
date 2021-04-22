@@ -121,8 +121,6 @@ listAttribute::~listAttribute()
 int listAttribute::get_selected_id()
 {
     QModelIndexList list;
-    QModelIndex idx;
-    int l;
     int row = ui->tableView->currentIndex().row();
 
     if (row >= model->size())
@@ -152,11 +150,7 @@ void listAttribute::insert()
     if (ea.exec()) {
         Attribute a = ea.Value();
         if (a.Insert()) {
-            change_type();
-            ui->editButton->setEnabled(false);
-            ui->deleteButton->setEnabled(false);
-            ui->recoverButton->setEnabled(false);
-            emit changeAttribute(a.Type());
+            finish_update(a);
         }
     }
 }
@@ -175,11 +169,7 @@ void listAttribute::edit()
         a = ea.Value();
         a.setId(id);
         if (a.Update()) {
-            change_type();
-            ui->editButton->setEnabled(false);
-            ui->deleteButton->setEnabled(false);
-            ui->recoverButton->setEnabled(false);
-            emit changeAttribute(a.Type());
+            finish_update(a);
         }
     }
 }
@@ -201,11 +191,7 @@ void listAttribute::remove()
     }
 
     if (a.setPassive()) {
-        change_type();
-        ui->editButton->setEnabled(false);
-        ui->deleteButton->setEnabled(false);
-        ui->recoverButton->setEnabled(false);
-        emit changeAttribute(a.Type());
+        finish_update(a);
     }
 }
 
@@ -221,10 +207,15 @@ void listAttribute::recovery()
         return;
 
     if (a.setActive()) {
-        change_type();
-        ui->editButton->setEnabled(false);
-        ui->deleteButton->setEnabled(false);
-        ui->recoverButton->setEnabled(false);
-        emit changeAttribute(a.Type());
+        finish_update(a);
     }
+}
+
+void listAttribute::finish_update(Attribute &a)
+{
+    change_type();
+    ui->editButton->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+    ui->recoverButton->setEnabled(false);
+    emit changeAttribute(a.Type());
 }
