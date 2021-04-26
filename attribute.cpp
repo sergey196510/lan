@@ -1,15 +1,18 @@
 #include "attribute.h"
 
-Attribute::Attribute(int _id)
+Attribute::Attribute(int _id):
+    id(_id),
+    type(0),
+    flag(0)
 {
-    id = 0;
-    type = 0;
-    flag = 0;
+//    id = 0;
+//    type = 0;
+//    flag = 0;
 
     if (_id == 0)
         return;
 
-    id = _id;
+//    id = _id;
     Read(id);
 }
 

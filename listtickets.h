@@ -37,7 +37,7 @@ class ListTicketsModel : public QAbstractTableModel
 
     int pid;
     QStringList header_data;
-    std::vector<Ticket> list;
+    QVector<Ticket> list;
     void read_list(int id);
 
 public:

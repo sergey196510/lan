@@ -1,14 +1,15 @@
 #include "address.h"
 
-Address::Address(int _id)
+Address::Address(int _id):
+    id(_id)
 {
-    id = 0;
+//    id = 0;
     name.clear();
 
     if (_id == 0)
         return;
 
-    id = _id;
+//    id = _id;
     read_by_id();
 }
 

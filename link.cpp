@@ -1,17 +1,29 @@
 #include "link.h"
 
-Link::Link()
+Link::Link():
+    id(0),
+    i_id(0),
+    a_id(0),
+    type(0),
+    active(0),
+    d_id(0)
 {
-    id = 0;
-    i_id = 0;
-    a_id = 0;
-    type = 0;
-    active = 0;
-    d_id = 0;
+//    id = 0;
+//    i_id = 0;
+//    a_id = 0;
+//    type = 0;
+//    active = 0;
+//    d_id = 0;
     descr.clear();
 }
 
 void Link::setData(int iid, QDate d1, int a, QString d, int f, QDateTime t)
+//    i_id(iid),
+//    dt(d1),
+//    active(a),
+//    descr(d),
+//    file(f),
+//    tm(t)
 {
     i_id = iid;
 //    a_id = aid;

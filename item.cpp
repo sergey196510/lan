@@ -1,8 +1,9 @@
 #include "item.h"
 
-Item::Item(int _id)
+Item::Item(int _id):
+    id(_id)
 {
-    id = _id;
+//    id = _id;
     cod.clear();
     name.clear();
 //    addr_id = 0;
